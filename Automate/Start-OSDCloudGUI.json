@@ -1,0 +1,24 @@
+{
+    "BrandName":                "AnyLinQ B.V. Laptop Installer",
+    "BrandColor":               "#0096D6",
+    "OSActivation":             "Volume",
+    "OSEdition":                "Enterprise",
+    "OSLanguage":               "nl-nl",
+    "OSName":                   "Windows 11 23H2 x64",
+    "OSReleaseID":              "23H2",
+    "OSVersion":                "Windows 11",
+    "OSLanguageValues":  [
+                                "nl-nl",
+                                "en-us"
+                        ],
+    "captureScreenshots":       true,
+    "ClearDiskConfirm":         false,
+    "restartComputer":          true,
+    "updateDiskDrivers":        true,
+    "updateFirmware":           false,
+    "updateNetworkDrivers":     true,
+    "updateSCSIDrivers":        true,
+    "WindowsUpdate":            true,
+    "WindowsUpdateDrivers":     true,
+    "WindowsDefenderUpdate":    true
+}
