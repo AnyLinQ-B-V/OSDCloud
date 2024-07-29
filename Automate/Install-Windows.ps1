@@ -49,6 +49,62 @@ $Global:MyOSDCloud = [ordered]@{
 }
 
 Start-OSDCloud @OSDCloudParameters
+#endregion
+
+Write-Host -ForegroundColor Green "Create C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json"
+$OOBEDeployJson = @'
+{
+    "Autopilot":  {
+                      "IsPresent":  false
+                  },
+    "AddNetFX3":  {
+                      "IsPresent":  true
+                    },                     
+    "RemoveAppx":  [
+                        "Microsoft.549981C3F5F10",
+                        "Microsoft.BingWeather",
+                        "Microsoft.GetHelp",
+                        "Microsoft.Getstarted",
+                        "Microsoft.Microsoft3DViewer",
+                        "Microsoft.MicrosoftOfficeHub",
+                        "Microsoft.MixedReality.Portal",
+                        "Microsoft.People",
+                        "Microsoft.SkypeApp",
+                        "Microsoft.Wallet",
+                        "microsoft.windowscommunicationsapps",
+                        "Microsoft.WindowsFeedbackHub",
+                        "Microsoft.WindowsMaps",
+                        "Microsoft.Xbox.TCUI",
+                        "Microsoft.XboxApp",
+                        "Microsoft.XboxGameOverlay",
+                        "Microsoft.XboxGamingOverlay",
+                        "Microsoft.XboxIdentityProvider",
+                        "Microsoft.XboxSpeechToTextOverlay",
+                        "Microsoft.YourPhone",
+                        "Microsoft.ZuneMusic",
+                        "Microsoft.ZuneVideo"
+                   ],
+    "UpdateDrivers":  {
+                          "IsPresent":  true
+                      },
+    "UpdateWindows":  {
+                          "IsPresent":  true
+                      }
+}
+'@
+If (!(Test-Path "C:\ProgramData\OSDeploy")) {
+    New-Item "C:\ProgramData\OSDeploy" -ItemType Directory -Force | Out-Null
+}
+$OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeploy.json" -Encoding ascii -Force
+
+Write-Host -ForegroundColor Green "Create C:\Windows\System32\OOBE.cmd"
+$OOBECMD = @'
+PowerShell -NoL -Com Set-ExecutionPolicy RemoteSigned -Force
+Set Path = %PATH%;C:\Program Files\WindowsPowerShell\Scripts
+Start /Wait PowerShell -NoL -C Start-OOBEDeploy
+Start /Wait PowerShell -NoL -C Restart-Computer -Force
+'@
+$OOBECMD | Out-File -FilePath 'C:\Windows\System32\OOBE.cmd' -Encoding ascii -Force
 
 #region Restart Computer
 Write-Host -ForegroundColor DarkMagenta "Restarting in 10 seconds..."
