@@ -14,7 +14,7 @@ if ((Get-MyComputerModel) -match 'Virtual') {
 }
 
 if (-not (Get-InstalledModule -Name 'OSD' -ErrorAction SilentlyContinue)) {
-    Install-Module -Name OSD -Force
+    Install-Module -Name OSD -Force -SkipPublisherCheck
     Import-Module OSD
 }
 #endregion

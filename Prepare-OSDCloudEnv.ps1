@@ -304,11 +304,11 @@ $Config | ConvertTo-Json | Set-Content -Path $ConfigFile
 #endregion
 
 #region Copy WinPE Autopilot prerequisite files
-if (-not (Test-Path -Path "$CurrentWorkspace\Config\oa3tool.exe")) {
-    Write-Host "Copying OA3 Tool from Windows ADK..." -NoNewline
-    Copy-Item -Path "${env:ProgramFiles(x86)}\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Licensing\OA30\oa3tool.exe" -Destination "$CurrentWorkspace\Config" -Force
-    Write-Host -ForegroundColor Green " Done."
-}
+    if (-not (Test-Path -Path "$CurrentWorkspace\Config\oa3tool.exe")) {
+        Write-Host "Copying OA3 Tool from Windows ADK..." -NoNewline
+        Copy-Item -Path "${env:ProgramFiles(x86)}\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools\amd64\Licensing\OA30\oa3tool.exe" -Destination "$CurrentWorkspace\Config" -Force
+        Write-Host -ForegroundColor Green " Done."
+    }
 if (-not (Test-Path -Path "$CurrentWorkspace\Config\PCPKsp.dll")) {
     Write-Host "Copying PCPKsp.dll from System32..." -NoNewline
     Copy-Item -Path "$env:windir\System32\PCPKsp.dll" -Destination "$CurrentWorkspace\Config\" -Force
