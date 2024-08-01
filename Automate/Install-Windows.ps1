@@ -9,8 +9,7 @@ It will automatically register the device in Autopilot (Intune).
 
 #region Prepare the environment
 if ((Get-MyComputerModel) -match 'Virtual') {
-    Write-Host  -ForegroundColor Green "Setting Display Resolution to 1600x"
-    Set-DisRes 1600
+    Write-Host  -ForegroundColor Green "Virtual environment detected."
 }
 
 if (-not (Get-InstalledModule -Name 'OSD' -ErrorAction SilentlyContinue)) {
@@ -105,14 +104,14 @@ $OOBEDeployJson | Out-File -FilePath "C:\ProgramData\OSDeploy\OSDeploy.OOBEDeplo
 
 #region [PostOS] OOBE CMD Command Line
 Write-Host -ForegroundColor Green "Downloading and creating script for OOBE phase"
-Invoke-RestMethod https://raw.githubusercontent.com/AnyLinQ-B-V/OSDCloud/main/Automate/Ap-Prereq.ps1 | Out-File -FilePath 'C:\Windows\Setup\scripts\autopilotprereq.ps1' -Encoding ascii -Force
-Invoke-RestMethod https://raw.githubusercontent.com/AnyLinQ-B-V/OSDCloud/main/Automate/Start-AutopilotOOBE.ps1 | Out-File -FilePath 'C:\Windows\Setup\scripts\autopilotoobe.ps1' -Encoding ascii -Force
+# Invoke-RestMethod https://raw.githubusercontent.com/AnyLinQ-B-V/OSDCloud/main/Automate/AP-Prereq.ps1 | Out-File -FilePath 'C:\Windows\Setup\scripts\autopilotprereq.ps1' -Encoding ascii -Force
+# Invoke-RestMethod https://raw.githubusercontent.com/AnyLinQ-B-V/OSDCloud/main/Automate/Start-AutopilotOOBE.ps1 | Out-File -FilePath 'C:\Windows\Setup\scripts\autopilotoobe.ps1' -Encoding ascii -Force
 
 $OOBECMD = @'
 @echo off
 # Execute OOBE Tasks
-start /wait powershell.exe -NoL -ExecutionPolicy Bypass -F C:\Windows\Setup\Scripts\autopilotprereq.ps1
-start /wait powershell.exe -NoL -ExecutionPolicy Bypass -F C:\Windows\Setup\Scripts\autopilotoobe.ps1
+# start /wait powershell.exe -NoL -ExecutionPolicy Bypass -F C:\Windows\Setup\Scripts\autopilotprereq.ps1
+# start /wait powershell.exe -NoL -ExecutionPolicy Bypass -F C:\Windows\Setup\Scripts\autopilotoobe.ps1
 
 # Below a PS session for debug and testing in system context, # when not needed 
 # start /wait powershell.exe -NoL -ExecutionPolicy Bypass
