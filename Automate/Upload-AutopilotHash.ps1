@@ -96,9 +96,11 @@ rundll32 X:\Windows\System32\PCPKsp.dll,DllInstall
 #################End WinPE TPM Fix###################
 
 #Run OA3Tool
+Write-Host "start-process $ProjectRoot\oa3tool.exe -workingdirectory $ProjectRoot -argumentlist /Report /ConfigFile=$ProjectRoot\OA3.cfg /NoKeyCheck -wait"
 start-process "$ProjectRoot\oa3tool.exe" -workingdirectory $ProjectRoot -argumentlist "/Report /ConfigFile=$ProjectRoot\OA3.cfg /NoKeyCheck" -wait
 
 #Read Hash from generated XML File
+Write-Host "[xml]$xmlhash = Get-Content -Path $ProjectRoot\OA3.xml"
 [xml]$xmlhash = Get-Content -Path "$ProjectRoot\OA3.xml"
 $hash=$xmlhash.Key.HardwareHash
 #endregion
@@ -108,6 +110,7 @@ $hash=$xmlhash.Key.HardwareHash
 $importStart = Get-Date
 $imported = @()
 $imported = Add-AutopilotImportedDevice -serialNumber $serial -hardwareIdentifier $Hash -groupTag $GroupTag #-assignedUser $_.'Assigned User'
+Write-Host "$imported"
 
 # Wait until the devices have been imported
 $processingCount = 1
