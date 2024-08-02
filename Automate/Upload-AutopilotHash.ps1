@@ -73,14 +73,8 @@ $oa3cft=@'
 </OA3>
 '@
 
-If(!(Test-Path $ProjectRoot\input.xml))
-{
-    New-Item "$ProjectRoot\input.xml" -ItemType File -Value $inputxml
-}
-If(!(Test-Path $ProjectRoot\OA3.cfg))
-{
-    New-Item "$ProjectRoot\OA3.cfg" -ItemType File -Value $oa3cft
-}
+New-Item "$ProjectRoot\input.xml" -ItemType File -Value $inputxml
+New-Item "$ProjectRoot\OA3.cfg" -ItemType File -Value $oa3cft
 
 $serial = (Get-WmiObject -Class Win32_BIOS).SerialNumber
 #endregion
