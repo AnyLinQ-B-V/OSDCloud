@@ -27,7 +27,7 @@ Get-WindowsAutoPilotInfo -Online -GroupTag "AQ-AutoDeployedV2" -Assign
 #region Start-OSDCloud configuration
 $OSDCloudParameters = @{
     OSVersion = "Windows 11"
-    OSBuild = "23H2"
+    OSBuild = "24H2"
     OSEdition = "Enterprise"
     OSLanguage = "nl-nl"
     OSLicense = "Volume"
@@ -66,7 +66,6 @@ $OOBEDeployJson = @'
                     "MicrosoftTeams",
                     "Microsoft.BingWeather",
                     "Microsoft.BingNews",
-                    "Microsoft.GamingApp",
                     "Microsoft.GetHelp",
                     "Microsoft.Getstarted",
                     "Microsoft.Messaging",
@@ -74,18 +73,12 @@ $OOBEDeployJson = @'
                     "Microsoft.MicrosoftStickyNotes",
                     "Microsoft.MSPaint",
                     "Microsoft.People",
-                    "Microsoft.PowerAutomateDesktop",
                     "Microsoft.StorePurchaseApp",
                     "Microsoft.Todos",
                     "microsoft.windowscommunicationsapps",
                     "Microsoft.WindowsFeedbackHub",
                     "Microsoft.WindowsMaps",
                     "Microsoft.WindowsSoundRecorder",
-                    "Microsoft.Xbox.TCUI",
-                    "Microsoft.XboxGameOverlay",
-                    "Microsoft.XboxGamingOverlay",
-                    "Microsoft.XboxIdentityProvider",
-                    "Microsoft.XboxSpeechToTextOverlay",
                     "Microsoft.ZuneMusic",
                     "Microsoft.ZuneVideo"
                    ],
