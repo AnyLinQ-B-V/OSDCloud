@@ -19,7 +19,9 @@ if (-not (Get-InstalledModule -Name 'OSD' -ErrorAction SilentlyContinue)) {
 #endregion
 
 #region Autopilot registration
-Invoke-RestMethod https://raw.githubusercontent.com/AnyLinQ-B-V/OSDCloud/main/Automate/Upload-AutopilotHash.ps1 | Invoke-Expression
+#Invoke-RestMethod https://raw.githubusercontent.com/AnyLinQ-B-V/OSDCloud/main/Automate/Upload-AutopilotHash.ps1 | Invoke-Expression
+Install-Script -Name Get-WindowsAutoPilotInfo -Force
+Get-WindowsAutoPilotInfo -Online -GroupTag "AQ-AutoDeployedV2" -Assign
 #endregion
 
 #region Start-OSDCloud configuration
